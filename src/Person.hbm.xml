@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="com.qiheng.hibernate.Person" table="person">
+		
+		<id name="id" column="id" type="string">
+			<generator class="uuid"></generator>
+			
+		</id>
+		
+		<discriminator column="personType" type="string"></discriminator>
+		
+		<property name="name" column="name" type="string"></property>
+		<property name="age" column="age" type="integer"></property>
+		
+		<subclass discriminator-value="student" name="com.qiheng.hibernate.Student">
+			<property name="number" column="number" type="long"></property>
+			<property name="grade" column="grade" type="string"></property>
+		</subclass>
+				
+		<subclass discriminator-value="teacher" name="com.qiheng.hibernate.Teacher">
+			<property name="salary" column="salary" type="integer"></property>
+		</subclass>		
+	</class>
+
+</hibernate-mapping>
